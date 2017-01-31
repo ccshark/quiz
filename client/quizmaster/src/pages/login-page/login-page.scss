@@ -3,7 +3,7 @@
     login-page {
 
         ion-content {
-            background-color: map-get($colors, secondary);
+            background-color: map-get($colors, primary);
         }
 
         scroll-content {
@@ -20,7 +20,7 @@
             border-radius: 30px !important;
             padding-left: 10px !important;
             margin-bottom: 10px;
-            background-color: #f6f6f6;
+            background-color: lighter;
             opacity: 0.7;
             font-size: 0.9em;
         }
@@ -31,6 +31,7 @@
 
         .login-logo {
             flex: 2;
+            color: light;
         }
 
         .login-form {
