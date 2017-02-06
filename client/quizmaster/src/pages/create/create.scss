@@ -1,0 +1,11 @@
+.ios, .md {
+
+    create-page {
+
+        ion-content {
+            background-color: map-get($colors, primary);
+        }
+
+    }
+
+}

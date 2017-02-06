@@ -1,5 +1,6 @@
 var AuthenticationController = require('./controllers/authentication'),
-    TodoController = require('./controllers/todos'),
+    //TodoController = require('./controllers/todos'),
+    QuizController = require('./controllers/quiz'),
     express = require('express'),
     passportService = require('../config/passport'),
     passport = require('passport');
@@ -11,7 +12,7 @@ module.exports = function(app){
 
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
-        todoRoutes = express.Router();
+        quizRoutes = express.Router();
 
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
@@ -24,11 +25,11 @@ module.exports = function(app){
     });
 
     // Todo Routes
-    apiRoutes.use('/todos', todoRoutes);
+    apiRoutes.use('/quiz', quizRoutes);
 
-    todoRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), TodoController.getTodos);
-    todoRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), TodoController.createTodo);
-    todoRoutes.delete('/:todo_id', requireAuth, AuthenticationController.roleAuthorization(['editor']), TodoController.deleteTodo);
+    quizRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), QuizController.getQuiz);
+    quizRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), QuizController.createQuiz);
+    quizRoutes.delete('/:quiz_id', requireAuth, AuthenticationController.roleAuthorization(['editor', 'creator']), QuizController.deleteQuiz);
 
     // Set up routes
     app.use('/api', apiRoutes);

@@ -1,0 +1,44 @@
+<ion-header>
+ <ion-navbar color="secondary">
+  <ion-title>
+    Create Quiz
+  </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Question</ion-label>
+        <ion-input [(ngModel)]="question" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Answare one (Right answare)</ion-label>
+        <ion-input [(ngModel)]="a1" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Answare two</ion-label>
+        <ion-input [(ngModel)]="a2" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Answare three</ion-label>
+        <ion-input [(ngModel)]="a3" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Answare four</ion-label>
+        <ion-input [(ngModel)]="a4" type="text"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+  </ion-card>
+  <button ion-button (click)="createQuestion()" color="secondary" block>
+    Create question
+  </button>
+
+</ion-content>

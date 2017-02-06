@@ -3,50 +3,48 @@ import { NavController, ModalController, AlertController, LoadingController } fr
 import { Quiz } from '../../providers/quiz';
 import { Auth } from '../../providers/auth';
 import { LoginPage } from '../login-page/login-page';
-import { CreatePage } from '../create/create';
 
 @Component({
-  selector: 'home-page',
-  templateUrl: 'home.html'
+  selector: 'create-page',
+  templateUrl: 'create.html'
 })
-export class HomePage {
+export class CreatePage {
 
   quiz: any;
   loading: any;
+
+  question: string;
+  a1: string;
+  a2: string;
+  a3: string;
+  a4: string;
 
   constructor(public navCtrl: NavController, public quizService: Quiz, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, public loadingCtrl: LoadingController) {
 
   }
 
-  ionViewDidLoad(){
+  createQuestion() {
+    var a = this.a1;
+    console.log(a);
 
-    this.quizService.getQuiz().then((data) => {
-          this.quiz = data;
+    var quiz = {
+      question: this.question,
+      answare1: this.a1,
+      answare2: this.a2,
+      answare3: this.a3,
+      answare4: this.a4
+    }
+
+    this.quizService.createQuiz(quiz).then((result) => {
+        this.loading.dismiss();
+        this.quiz = result;
+        console.log("question created");
     }, (err) => {
+        this.loading.dismiss();
         console.log("not allowed");
     });
 
-  }
-
-  addQuiz(){
-    this.navCtrl.push(CreatePage);
-  }
-
-  showLoader(){
-
-    this.loading = this.loadingCtrl.create({
-      content: 'Authenticating...'
-    });
-
-    this.loading.present();
-
-  }
-
-  logout(){
-
-    this.authService.logout();
-    this.navCtrl.setRoot(LoginPage);
 
   }
 
