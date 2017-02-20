@@ -1,35 +1,38 @@
 <ion-header>
  <ion-navbar color="secondary">
   <ion-title>
-    Todo Roles
+    Quiz
   </ion-title>
-  <ion-buttons end>
-    <button ion-button icon-only (click)="addQuiz()"><ion-icon name="add"></ion-icon></button>
-  </ion-buttons>
-  <ion-buttons start>
-    <button ion-button icon-only (click)="logout()"><ion-icon name="power"></ion-icon></button>
-  </ion-buttons>
  </ion-navbar>
 </ion-header>
 
 <ion-content>
+ <ion-card *ngIf="quiz">
 
-  <ion-list no-lines>
+    <ion-item col-center>
+       Question
+    </ion-item>
 
-    <ion-item-sliding *ngFor="let todo of todos">
+    <ion-card-content class="question">
+      <p>{{quiz.question}}</p>
+    </ion-card-content>
 
-      <ion-item>
-        {{todo.title}}
-      </ion-item>
+    <ion-row>
+      <ion-col padding class="answare">
+        <p>{{quiz.answare1}}</p>
+      </ion-col>
+      <ion-col padding class="answare">
+        <p>{{quiz.answare2}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding class="answare">
+        <p>{{quiz.answare3}}</p>
+      </ion-col>
+      <ion-col padding class="answare">
+        <p>{{quiz.answare4}}</p>
+      </ion-col>
+    </ion-row>
 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="deleteTodo(todo)">
-          <ion-icon name="trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-
-  </ion-list>
-
+  </ion-card>
 </ion-content>

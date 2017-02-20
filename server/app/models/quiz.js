@@ -1,12 +1,21 @@
 var mongoose = require('mongoose');
 
 var QuizSchema = new mongoose.Schema({
-    question: String,
-    answare1: String,
-    answare2: String,
-    answare3: String,
-    answare4: String,
-    author: String
+  question: {
+      type: String
+  },
+  answare1: {
+      type: String
+  },
+  answare2: {
+      type: String
+  },
+  answare3: {
+      type: String
+  },
+  answare4: {
+      type: String
+  }
 }, {
     timestamps: true
 });

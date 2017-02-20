@@ -5,6 +5,7 @@ exports.getQuiz = function(req, res, next){
         if (err){
             res.send(err);
         }
+        console.log(quiz);
         res.json(quiz);
     });
 }

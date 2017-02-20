@@ -1,96 +1,56 @@
 import { Component } from "@angular/core";
 import { NavController, ModalController, AlertController, LoadingController } from 'ionic-angular';
-import { Todos } from '../../providers/todos';
+import { Quiz } from '../../providers/quiz';
 import { Auth } from '../../providers/auth';
 import { LoginPage } from '../login-page/login-page';
 
 @Component({
-  selector: 'home-page',
-  templateUrl: 'home.html'
+  selector: 'quiz-page',
+  templateUrl: 'quiz.html'
 })
-export class HomePage {
+export class QuizPage {
 
-  todos: any;
+  quiz: any;
   loading: any;
+  quizCount: Number = 0;
+  maxCount: Number = 3;
+  usedQuestions: Array<number>;
 
-  constructor(public navCtrl: NavController, public todoService: Todos, public modalCtrl: ModalController,
+
+  constructor(public navCtrl: NavController, public quizService: Quiz, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, public loadingCtrl: LoadingController) {
 
   }
 
   ionViewDidLoad(){
+    if(this.quizCount < this.maxCount) {
+        this.getQuiz();
+    }
+  }
 
-    this.todoService.getTodos().then((data) => {
-          this.todos = data;
+
+  getQuiz() {
+    this.quizService.getQuiz().then((data) => {
+          var index = this.randomQuiz(data);
+          this.quiz = data[index];
     }, (err) => {
         console.log("not allowed");
     });
-
   }
 
-  addTodo(){
-
-    let prompt = this.alertCtrl.create({
-      title: 'Add Todo',
-      message: 'Describe your todo below:',
-      inputs: [
-        {
-          name: 'title'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
-          handler: todo => {
-
-                if(todo){
-
-                    this.showLoader();
-
-                    this.todoService.createTodo(todo).then((result) => {
-                        this.loading.dismiss();
-                        this.todos = result;
-                        console.log("todo created");
-                    }, (err) => {
-                        this.loading.dismiss();
-                        console.log("not allowed");
-                    });
-
-                }
-
-
-          }
-        }
-      ]
-    });
-
-    prompt.present();
-
-  }
-
-  deleteTodo(todo){
-
-    this.showLoader();
-
-    //Remove from database
-    this.todoService.deleteTodo(todo._id).then((result) => {
-
-      this.loading.dismiss();
-
-      //Remove locally
-        let index = this.todos.indexOf(todo);
-
-        if(index > -1){
-            this.todos.splice(index, 1);
-        }
-
-    }, (err) => {
-      this.loading.dismiss();
-        console.log("not allowed");
-    });
+  randomQuiz(data:any) {
+    console.log("loo")
+    return Math.floor((Math.random() * data.length));
+    //var index;
+    /*
+    if(random in this.usedQuestions) {
+      console.log("in array");
+      this.randomQuiz(data);
+    } else {
+      console.log("add to array");
+      this.usedQuestions.push(random);
+      return random;
+    } */
   }
 
   showLoader(){

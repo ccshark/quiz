@@ -4,6 +4,7 @@ import { Quiz } from '../../providers/quiz';
 import { Auth } from '../../providers/auth';
 import { LoginPage } from '../login-page/login-page';
 import { CreatePage } from '../create/create';
+import { QuizPage } from '../quiz/quiz';
 
 @Component({
   selector: 'home-page',
@@ -27,6 +28,10 @@ export class HomePage {
         console.log("not allowed");
     });
 
+  }
+
+  startQuiz() {
+    this.navCtrl.push(QuizPage);
   }
 
   addQuiz(){

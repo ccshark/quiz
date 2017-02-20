@@ -1,7 +1,7 @@
 {
-  "name": "ionic2-roles",
+  "name": "Quiz master",
   "version": "0.1.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Quiz game",
   "engines": {
     "node": "5.9.1"
   },

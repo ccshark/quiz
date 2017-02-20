@@ -13,11 +13,11 @@ export class CreatePage {
   quiz: any;
   loading: any;
 
-  question: string;
-  a1: string;
-  a2: string;
-  a3: string;
-  a4: string;
+  question: String;
+  a1: String;
+  a2: String;
+  a3: String;
+  a4: String;
 
   constructor(public navCtrl: NavController, public quizService: Quiz, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, public loadingCtrl: LoadingController) {
@@ -25,9 +25,6 @@ export class CreatePage {
   }
 
   createQuestion() {
-    var a = this.a1;
-    console.log(a);
-
     var quiz = {
       question: this.question,
       answare1: this.a1,
@@ -39,7 +36,7 @@ export class CreatePage {
     this.quizService.createQuiz(quiz).then((result) => {
         this.loading.dismiss();
         this.quiz = result;
-        console.log("question created");
+        console.log("Question created");
     }, (err) => {
         this.loading.dismiss();
         console.log("not allowed");

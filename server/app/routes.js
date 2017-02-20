@@ -1,5 +1,4 @@
 var AuthenticationController = require('./controllers/authentication'),
-    //TodoController = require('./controllers/todos'),
     QuizController = require('./controllers/quiz'),
     express = require('express'),
     passportService = require('../config/passport'),
@@ -24,7 +23,7 @@ module.exports = function(app){
         res.send({ content: 'Success'});
     });
 
-    // Todo Routes
+    // Quiz Routes
     apiRoutes.use('/quiz', quizRoutes);
 
     quizRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), QuizController.getQuiz);

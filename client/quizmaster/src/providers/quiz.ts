@@ -33,7 +33,7 @@ export class Quiz {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
-
+      console.log(quiz);
       this.http.post('http://127.0.0.1:8080/api/quiz', JSON.stringify(quiz), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {

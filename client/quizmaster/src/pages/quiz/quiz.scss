@@ -1,11 +1,35 @@
 .ios, .md {
 
-    home-page {
+    quiz-page {
 
         ion-content {
             background-color: map-get($colors, primary);
         }
 
-    }
+        .question p {
+          margin: 0 auto;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          font-size: 14px;
+          color: #000000;
+          text-align: center;
+        }
 
+        .answare {
+          height: 60px;
+          margin: 10px ;
+          width: 60px;
+          border-radius: 5px;
+          background-color: map-get($colors, light);
+        }
+
+        .answare p {
+          margin: 0 auto;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          font-size: 14px;
+          color: #000000;
+          text-align: center;
+        }
+    }
 }

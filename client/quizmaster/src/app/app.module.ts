@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { CreatePage } from '../pages/create/create';
+import { QuizPage } from '../pages/quiz/quiz';
 import { LoginPage } from '../pages/login-page/login-page';
 import { SignupPage } from '../pages/signup-page/signup-page';
 import { Quiz } from '../providers/quiz';
@@ -14,6 +15,7 @@ import { Auth } from '../providers/auth';
     MyApp,
     HomePage,
     CreatePage,
+    QuizPage,
     LoginPage,
     SignupPage
   ],
@@ -25,6 +27,7 @@ import { Auth } from '../providers/auth';
     MyApp,
     HomePage,
     CreatePage,
+    QuizPage,
     LoginPage,
     SignupPage
   ],
