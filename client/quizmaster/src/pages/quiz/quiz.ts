@@ -31,8 +31,20 @@ export class QuizPage {
 
   getQuiz() {
     this.quizService.getQuiz().then((data) => {
-          var index = this.randomQuiz(data);
-          this.quiz = data[index];
+      var dataString = JSON.stringify(data);
+      var quizData = JSON.parse(dataString).results[0];
+
+      quizData.options = [quizData.incorrect_answers[0], quizData.incorrect_answers[1], quizData.incorrect_answers[2], quizData.correct_answer];
+      console.log(quizData);
+      this.quiz = quizData;
+      //JSON.stringify(data);
+      //console.log(data.results[0]);
+    //  console.log(JSON.parse(data));
+      //this.quiz = data.results[0];
+
+          //var index = this.randomQuiz(data);
+          //this.quiz = data[index];
+          //console.log(this.quiz.options);
     }, (err) => {
         console.log("not allowed");
     });
@@ -51,6 +63,19 @@ export class QuizPage {
       this.usedQuestions.push(random);
       return random;
     } */
+  }
+
+  answare(option) {
+    var answare = this.quiz.options.indexOf(option);
+    console.log(answare);
+    if(answare == 0) {
+    }
+    /*this.quizService.answareQuiz(option)
+      .then((data) => {
+          console.log(data);
+    }, (err) => {
+        console.log("not allowed");
+    }); */
   }
 
   showLoader(){

@@ -27,6 +27,22 @@ export class Quiz {
 
   }
 
+  answareQuiz(answare) {
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers();
+      headers.append('Authorization', this.authService.token);
+
+      this.http.post('http://127.0.0.1:8080/api/quiz/answare', answare, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   createQuiz(quiz){
     return new Promise((resolve, reject) => {
 
@@ -34,7 +50,7 @@ export class Quiz {
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
       console.log(quiz);
-      this.http.post('http://127.0.0.1:8080/api/quiz', JSON.stringify(quiz), {headers: headers})
+      this.http.post('http://127.0.0.1:8080/api/quiz/create', JSON.stringify(quiz), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);

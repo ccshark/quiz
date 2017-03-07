@@ -1,6 +1,22 @@
 var Quiz = require('../models/quiz');
+var request = require("request");
 
 exports.getQuiz = function(req, res, next){
+    request("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple", function(error, response, body) {
+      console.log(JSON.parse(body).results[0]);
+      res.json(JSON.parse(body));
+    });
+    /*Quiz.find(function(err, quiz) {
+        if (err){
+            res.send(err);
+        }
+        console.log(quiz);
+        res.json(quiz);
+    }); */
+}
+
+exports.answareQuiz = function(req, res, next){
+    console.log(req.body.answare);
     Quiz.find(function(err, quiz) {
         if (err){
             res.send(err);
@@ -11,14 +27,11 @@ exports.getQuiz = function(req, res, next){
 }
 
 exports.createQuiz = function(req, res, next){
-  console.log("loo");
   console.log(req.body.question);
+  console.log(req.body.options);
     Quiz.create({
         question : req.body.question,
-        answare1 : req.body.answare1,
-        answare2 : req.body.answare2,
-        answare3 : req.body.answare3,
-        answare4 : req.body.answare4
+        options : req.body.options
     }, function(err, quiz) {
         if (err){
             res.send(err);

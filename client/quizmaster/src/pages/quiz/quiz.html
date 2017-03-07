@@ -17,22 +17,20 @@
       <p>{{quiz.question}}</p>
     </ion-card-content>
 
-    <ion-row>
-      <ion-col padding class="answare">
-        <p>{{quiz.answare1}}</p>
+    <div *ngFor="let option of quiz.options">
+      <ion-col padding class="answare" (click)="answare(option)">
+        <p>{{option}}</p>
       </ion-col>
-      <ion-col padding class="answare">
-        <p>{{quiz.answare2}}</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
+    </div>
+
+    <!-- <ion-row>
       <ion-col padding class="answare">
         <p>{{quiz.answare3}}</p>
       </ion-col>
       <ion-col padding class="answare">
         <p>{{quiz.answare4}}</p>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
   </ion-card>
 </ion-content>

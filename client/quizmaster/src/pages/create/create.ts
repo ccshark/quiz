@@ -27,18 +27,15 @@ export class CreatePage {
   createQuestion() {
     var quiz = {
       question: this.question,
-      answare1: this.a1,
-      answare2: this.a2,
-      answare3: this.a3,
-      answare4: this.a4
+      options : [this.a1, this.a2, this.a3, this.a4]
     }
 
     this.quizService.createQuiz(quiz).then((result) => {
-        this.loading.dismiss();
+        //this.loading.dismiss();
         this.quiz = result;
         console.log("Question created");
     }, (err) => {
-        this.loading.dismiss();
+        //this.loading.dismiss();
         console.log("not allowed");
     });
 

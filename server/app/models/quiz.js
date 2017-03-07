@@ -4,17 +4,8 @@ var QuizSchema = new mongoose.Schema({
   question: {
       type: String
   },
-  answare1: {
-      type: String
-  },
-  answare2: {
-      type: String
-  },
-  answare3: {
-      type: String
-  },
-  answare4: {
-      type: String
+  options: {
+    type: Array
   }
 }, {
     timestamps: true
