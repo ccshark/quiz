@@ -16,6 +16,35 @@ export class QuizPage {
   maxCount: Number = 3;
   usedQuestions: Array<number>;
   itemclass = '';
+  showCategory = true;
+
+  category:Number;
+
+  categories:any = ['general knowledge',
+                    'books',
+                    'film',
+                    'music',
+                    'musical theatres',
+                    'television',
+                    'video games',
+                    'board games',
+                    'science & nature',
+                    'computers',
+                    'mathematics',
+                    'mythology',
+                    'sports',
+                    'geography',
+                    'history',
+                    'politics',
+                    'art',
+                    'celebrities',
+                    'animals',
+                    'veihcles',
+                    'comics',
+                    'gadgets',
+                    'japanese anime & manga',
+                    'cartoon & animations'
+                  ];
 
 
   constructor(public navCtrl: NavController, public quizService: Quiz, public modalCtrl: ModalController,
@@ -25,13 +54,19 @@ export class QuizPage {
 
   ionViewDidLoad(){
     if(this.quizCount < this.maxCount) {
-        this.getQuiz();
+        //this.getQuiz();
     }
   }
 
+  selectCategory(category) {
+    this.showCategory = false;
+    this.category = this.categories.indexOf(category) + 9;
+    this.getQuiz();
+  }
 
   getQuiz() {
-    this.quizService.getQuiz().then((data) => {
+    console.log(this.category);
+    this.quizService.getQuiz(this.category).then((data) => {
       var dataString = JSON.stringify(data);
       //var dataEscaped = dataString.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"').replace(/&#039;/g, "'");
       //var dataEscaped = dataString.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
@@ -71,8 +106,6 @@ export class QuizPage {
   }
 
   answare(option) {
-    console.log(option);
-
     if(option.name == this.quiz.correct_answer) {
       option.class = option.class + " correct";
       this.getQuiz();
@@ -83,7 +116,6 @@ export class QuizPage {
   }
 
   showLoader(){
-
     this.loading = this.loadingCtrl.create({
       content: 'Authenticating...'
     });
@@ -93,10 +125,8 @@ export class QuizPage {
   }
 
   logout(){
-
     this.authService.logout();
     this.navCtrl.setRoot(LoginPage);
-
   }
 
 }

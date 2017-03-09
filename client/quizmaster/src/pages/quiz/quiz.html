@@ -7,6 +7,10 @@
 </ion-header>
 
 <ion-content>
+ <div *ngIf="showCategory">
+   <button *ngFor="let category of categories" ion-button color="secondary" (click)="selectCategory(category)" block>{{category}}</button>
+ </div>
+
  <ion-card *ngIf="quiz">
 
     <ion-item col-center>

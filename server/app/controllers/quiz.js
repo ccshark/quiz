@@ -2,7 +2,9 @@ var Quiz = require('../models/quiz');
 var request = require("request");
 
 exports.getQuiz = function(req, res, next){
-    request("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple", function(error, response, body) {
+    var category = req.params.category;
+    console.log(category);
+    request("https://opentdb.com/api.php?amount=1&category=" + category + "&difficulty=easy&type=multiple", function(error, response, body) {
       console.log(JSON.parse(body).results[0]);
       res.json(JSON.parse(body));
     });

@@ -22,11 +22,11 @@ export class HomePage {
 
   ionViewDidLoad(){
 
-    this.quizService.getQuiz().then((data) => {
+    /*this.quizService.getQuiz().then((data) => {
           this.quiz = data;
     }, (err) => {
         console.log("not allowed");
-    });
+    }); */
 
   }
 

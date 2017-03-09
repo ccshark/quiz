@@ -26,7 +26,7 @@ module.exports = function(app){
     // Quiz Routes
     apiRoutes.use('/quiz', quizRoutes);
 
-    quizRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), QuizController.getQuiz);
+    quizRoutes.get('/:category', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), QuizController.getQuiz);
     quizRoutes.post('/answare', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), QuizController.answareQuiz);
     quizRoutes.post('/create', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), QuizController.createQuiz);
     quizRoutes.delete('/:quiz_id', requireAuth, AuthenticationController.roleAuthorization(['editor', 'creator']), QuizController.deleteQuiz);
