@@ -15,6 +15,7 @@ export class QuizPage {
   quizCount: Number = 0;
   maxCount: Number = 3;
   usedQuestions: Array<number>;
+  itemclass = '';
 
 
   constructor(public navCtrl: NavController, public quizService: Quiz, public modalCtrl: ModalController,
@@ -32,50 +33,53 @@ export class QuizPage {
   getQuiz() {
     this.quizService.getQuiz().then((data) => {
       var dataString = JSON.stringify(data);
+      //var dataEscaped = dataString.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"').replace(/&#039;/g, "'");
+      //var dataEscaped = dataString.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+      //var dataEscaped = dataString.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace("&#039;", /'/g);
+      //var dataEscaped = dataString.replace(/&/g, "&amp;")
+      //console.log(dataEscaped);
       var quizData = JSON.parse(dataString).results[0];
 
-      quizData.options = [quizData.incorrect_answers[0], quizData.incorrect_answers[1], quizData.incorrect_answers[2], quizData.correct_answer];
+      var options = [{name: quizData.incorrect_answers[0], class: "answare"}, {name: quizData.incorrect_answers[1], class: "answare"}, {name: quizData.incorrect_answers[2], class: "answare"}, {name: quizData.correct_answer, class: "answare"}];
+
+      quizData.options = this.random(options);
+
       console.log(quizData);
       this.quiz = quizData;
-      //JSON.stringify(data);
-      //console.log(data.results[0]);
-    //  console.log(JSON.parse(data));
-      //this.quiz = data.results[0];
-
-          //var index = this.randomQuiz(data);
-          //this.quiz = data[index];
-          //console.log(this.quiz.options);
     }, (err) => {
         console.log("not allowed");
     });
   }
 
-  randomQuiz(data:any) {
-    console.log("loo")
-    return Math.floor((Math.random() * data.length));
-    //var index;
-    /*
-    if(random in this.usedQuestions) {
-      console.log("in array");
-      this.randomQuiz(data);
-    } else {
-      console.log("add to array");
-      this.usedQuestions.push(random);
-      return random;
-    } */
+  random(array:any) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
   answare(option) {
-    var answare = this.quiz.options.indexOf(option);
-    console.log(answare);
-    if(answare == 0) {
+    console.log(option);
+
+    if(option.name == this.quiz.correct_answer) {
+      option.class = option.class + " correct";
+      this.getQuiz();
+    } else {
+      option.class = option.class + " incorrect";
+      this.getQuiz();
     }
-    /*this.quizService.answareQuiz(option)
-      .then((data) => {
-          console.log(data);
-    }, (err) => {
-        console.log("not allowed");
-    }); */
   }
 
   showLoader(){

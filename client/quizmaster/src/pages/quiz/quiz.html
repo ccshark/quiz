@@ -18,8 +18,10 @@
     </ion-card-content>
 
     <div *ngFor="let option of quiz.options">
-      <ion-col padding class="answare" (click)="answare(option)">
-        <p>{{option}}</p>
+      <ion-col padding
+      class="{{option.class}}"
+      (click)="answare(option)">
+        <p>{{option.name}}</p>
       </ion-col>
     </div>
 
