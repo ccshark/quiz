@@ -12,14 +12,15 @@ export class QuizPage {
 
   quiz: any;
   loading: any;
-  quizCount: Number = 0;
+  quizCount = 1;
   maxCount: Number = 3;
   usedQuestions: Array<number>;
   itemclass = '';
   showCategory = true;
+  showQuiz = false;
 
   category:Number;
-
+  categoryPool:any;
   categories:any = ['general knowledge',
                     'books',
                     'film',
@@ -54,18 +55,32 @@ export class QuizPage {
 
   ionViewDidLoad(){
     if(this.quizCount < this.maxCount) {
-        //this.getQuiz();
+        this.setCategoryPool();
+    }
+  }
+
+  setCategoryPool() {
+    this.categoryPool = [];
+    for(var i = 0; i < 3; i++) {
+        this.randomCategory();
+    }
+  }
+
+  randomCategory() {
+    var rand = Math.floor(Math.random() * this.categories.length);
+    if(this.categoryPool.indexOf(this.category[rand])) {
+      this.randomCategory();
+    } else {
+      this.categoryPool.push(this.categories[rand]);
     }
   }
 
   selectCategory(category) {
-    this.showCategory = false;
     this.category = this.categories.indexOf(category) + 9;
     this.getQuiz();
   }
 
   getQuiz() {
-    console.log(this.category);
     this.quizService.getQuiz(this.category).then((data) => {
       var dataString = JSON.stringify(data);
       //var dataEscaped = dataString.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"').replace(/&#039;/g, "'");
@@ -74,13 +89,12 @@ export class QuizPage {
       //var dataEscaped = dataString.replace(/&/g, "&amp;")
       //console.log(dataEscaped);
       var quizData = JSON.parse(dataString).results[0];
-
       var options = [{name: quizData.incorrect_answers[0], class: "answare"}, {name: quizData.incorrect_answers[1], class: "answare"}, {name: quizData.incorrect_answers[2], class: "answare"}, {name: quizData.correct_answer, class: "answare"}];
-
       quizData.options = this.random(options);
-
-      console.log(quizData);
       this.quiz = quizData;
+
+      this.showQuiz = true;
+      this.showCategory = false;
     }, (err) => {
         console.log("not allowed");
     });
@@ -88,30 +102,39 @@ export class QuizPage {
 
   random(array:any) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
-      // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
-
-      // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-
     return array;
   }
 
   answare(option) {
     if(option.name == this.quiz.correct_answer) {
       option.class = option.class + " correct";
-      this.getQuiz();
+      this.updateQuiz();
     } else {
       option.class = option.class + " incorrect";
+      this.updateQuiz();
+    }
+  }
+
+  updateQuiz() {
+    this.showQuiz = false;
+    if(this.quizCount < this.maxCount) {
+      this.quizCount++;
       this.getQuiz();
+    } else {
+      setTimeout(() => {
+        this.quizCount = 1;
+        this.showCategory = true;
+        this.setCategoryPool();
+        this.quiz = [];
+    }, 800);
+
     }
   }
 

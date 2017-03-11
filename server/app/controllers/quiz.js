@@ -3,11 +3,11 @@ var request = require("request");
 
 exports.getQuiz = function(req, res, next){
     var category = req.params.category;
-    console.log(category);
     request("https://opentdb.com/api.php?amount=1&category=" + category + "&difficulty=easy&type=multiple", function(error, response, body) {
       console.log(JSON.parse(body).results[0]);
       res.json(JSON.parse(body));
     });
+    //TODO: Spara ner frågor i egen databas för att föra statistik
     /*Quiz.find(function(err, quiz) {
         if (err){
             res.send(err);
@@ -18,7 +18,6 @@ exports.getQuiz = function(req, res, next){
 }
 
 exports.answareQuiz = function(req, res, next){
-    console.log(req.body.answare);
     Quiz.find(function(err, quiz) {
         if (err){
             res.send(err);
@@ -29,7 +28,9 @@ exports.answareQuiz = function(req, res, next){
 }
 
 exports.createQuiz = function(req, res, next){
-  console.log(req.body.question);
+
+  //TODO: ska mappas mot trivia api't för att skapa frågor
+  /*console.log(req.body.question);
   console.log(req.body.options);
     Quiz.create({
         question : req.body.question,
@@ -44,10 +45,11 @@ exports.createQuiz = function(req, res, next){
             }
             res.json(quiz);
         });
-    });
+    }); */
 }
 
 exports.deleteQuiz = function(req, res, next){
+  //TODO ska nog inte finnas med
     Quiz.remove({
         _id : req.params.quiz_id
     }, function(err, quiz) {

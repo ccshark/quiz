@@ -8,35 +8,37 @@
 
 <ion-content>
  <div *ngIf="showCategory">
-   <button *ngFor="let category of categories" ion-button color="secondary" (click)="selectCategory(category)" block>{{category}}</button>
+   <button *ngFor="let category of categoryPool" ion-button color="secondary" (click)="selectCategory(category)" block>{{category}}</button>
  </div>
 
- <ion-card *ngIf="quiz">
+ <div *ngIf="!showCategory">
+   <ion-card *ngIf="quiz">
 
-    <ion-item col-center>
-       Question
-    </ion-item>
+      <ion-item col-center>
+         Question
+      </ion-item>
 
-    <ion-card-content class="question">
-      <p>{{quiz.question}}</p>
-    </ion-card-content>
+      <ion-card-content class="question">
+        <p>{{quiz.question}}</p>
+      </ion-card-content>
 
-    <div *ngFor="let option of quiz.options">
-      <ion-col padding
-      class="{{option.class}}"
-      (click)="answare(option)">
-        <p>{{option.name}}</p>
-      </ion-col>
-    </div>
+      <div *ngFor="let option of quiz.options">
+        <ion-col padding
+        class="{{option.class}}"
+        (click)="answare(option)">
+          <p>{{option.name}}</p>
+        </ion-col>
+      </div>
 
-    <!-- <ion-row>
-      <ion-col padding class="answare">
-        <p>{{quiz.answare3}}</p>
-      </ion-col>
-      <ion-col padding class="answare">
-        <p>{{quiz.answare4}}</p>
-      </ion-col>
-    </ion-row> -->
+      <!-- <ion-row>
+        <ion-col padding class="answare">
+          <p>{{quiz.answare3}}</p>
+        </ion-col>
+        <ion-col padding class="answare">
+          <p>{{quiz.answare4}}</p>
+        </ion-col>
+      </ion-row> -->
 
-  </ion-card>
+    </ion-card>
+  </div>
 </ion-content>
