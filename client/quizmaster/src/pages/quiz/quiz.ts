@@ -54,9 +54,9 @@ export class QuizPage {
   }
 
   ionViewDidLoad(){
-    if(this.quizCount < this.maxCount) {
+    //if(this.quizCount < this.maxCount) {
         this.setCategoryPool();
-    }
+    //}
   }
 
   setCategoryPool() {
@@ -68,10 +68,10 @@ export class QuizPage {
 
   randomCategory() {
     var rand = Math.floor(Math.random() * this.categories.length);
-    if(this.categoryPool.indexOf(this.category[rand])) {
-      this.randomCategory();
-    } else {
+    if(this.categoryPool.indexOf(this.categories[rand]) == -1) {
       this.categoryPool.push(this.categories[rand]);
+    } else {
+      this.randomCategory();
     }
   }
 
