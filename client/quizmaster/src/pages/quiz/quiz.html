@@ -1,11 +1,11 @@
 <ion-header>
  <ion-navbar color="secondary">
   <ion-title>
-    Quiz
+    {{message}}
   </ion-title>
  </ion-navbar>
 </ion-header>
-
+<p>da</p>
 <ion-content>
  <div *ngIf="showCategory">
    <button *ngFor="let category of categoryPool" ion-button color="secondary" (click)="selectCategory(category)" block>{{category}}</button>

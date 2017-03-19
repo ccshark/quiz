@@ -1,10 +1,11 @@
 <ion-header>
  <ion-navbar color="secondary">
   <ion-title>
-    Quiz master
+    Quiz masterr
   </ion-title>
   <ion-buttons end>
     <button ion-button icon-only (click)="addQuiz()"><ion-icon name="add"></ion-icon></button>
+    <button ion-button icon-only (click)="startChat()"><ion-icon name="chatboxes"></ion-icon></button>
   </ion-buttons>
   <ion-buttons start>
     <button ion-button icon-only (click)="logout()"><ion-icon name="power"></ion-icon></button>
@@ -12,6 +13,18 @@
  </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <button ion-button color="secondary" (click)="startQuiz()" block>Start quiz</button>
+<ion-content padding>
+  <h5>create new game room</h5>
+  <ion-item>
+    <ion-label floating>Game Room</ion-label>
+    <ion-input [(ngModel)]="gameRoom" type="text"></ion-input>
+  </ion-item>
+  <button ion-button color="secondary" (click)="joinGame(gameRoom)" block>Join Game</button>
+  <br>
+  <h5>create new game room</h5>
+  <ion-item>
+    <ion-label floating>Game Room</ion-label>
+    <ion-input [(ngModel)]="newGameRoom" type="text"></ion-input>
+  </ion-item>
+  <button ion-button color="secondary" (click)="createGame(newGameRoom)" block>Create Game</button>
 </ion-content>

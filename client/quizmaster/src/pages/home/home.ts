@@ -5,6 +5,9 @@ import { Auth } from '../../providers/auth';
 import { LoginPage } from '../login-page/login-page';
 import { CreatePage } from '../create/create';
 import { QuizPage } from '../quiz/quiz';
+import { ChatPage } from '../chat/chat';
+import { GameLobbyPage } from '../game-lobby/game-lobby';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'home-page',
@@ -14,10 +17,11 @@ export class HomePage {
 
   quiz: any;
   loading: any;
+  socket: any;
 
   constructor(public navCtrl: NavController, public quizService: Quiz, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, public loadingCtrl: LoadingController) {
-
+      this.socket = io('http://localhost:8080');
   }
 
   ionViewDidLoad(){
@@ -30,8 +34,18 @@ export class HomePage {
 
   }
 
-  startQuiz() {
-    this.navCtrl.push(QuizPage);
+  startChat() {
+    this.navCtrl.push(ChatPage);
+  }
+
+  createGame(gameRoom) {
+    this.navCtrl.push(GameLobbyPage, {
+    param1: gameRoom});
+  }
+
+  joinGame(gameRoom) {
+    console.log(gameRoom);
+    //this.navCtrl.push(QuizPage);
   }
 
   addQuiz(){

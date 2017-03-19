@@ -17,6 +17,11 @@ exports.getQuiz = function(req, res, next){
     }); */
 }
 
+exports.startQuiz = function(req, res, next){
+    //start quiz
+    res.send("loo");
+}
+
 exports.answareQuiz = function(req, res, next){
     Quiz.find(function(err, quiz) {
         if (err){

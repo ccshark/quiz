@@ -1,0 +1,48 @@
+.ios, .md {
+
+    chat-page {
+
+        ion-content {
+            background-color: map-get($colors, primary);
+        }
+
+        .question {
+            height: 100px;
+        }
+
+        .question p {
+          margin: 0 auto;
+          margin-top: 5px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          color: #000000;
+          text-align: center;
+        }
+
+        .answare {
+          height: 80px;
+          float: left;
+          margin: 10px 10px 10px 14px;
+          width: 150px;
+          border-radius: 5px;
+          background-color: map-get($colors, light);
+        }
+
+        .correct {
+          background-color: green;
+        }
+
+        .incorrect {
+          background-color: red;
+        }
+
+        .answare p {
+          margin: 0 auto;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          font-size: 14px;
+          color: #000000;
+          text-align: center;
+        }
+    }
+}

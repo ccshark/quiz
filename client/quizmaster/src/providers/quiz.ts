@@ -10,6 +10,23 @@ export class Quiz {
 
   }
 
+
+  startQuiz(){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Authorization', this.authService.token);
+
+      this.http.get('http://127.0.0.1:8080/api/quiz/start', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
   getQuiz(category){
     return new Promise((resolve, reject) => {
       console.log(category);
